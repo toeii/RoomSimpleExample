@@ -25,15 +25,13 @@ class BookLikeActivity : AppCompatActivity() {
 
             // Query like data for Room
             mDatas = App.instance?.db?.bookDao()?.getAllByLike(true)!!
-            if(mDatas.isNotEmpty()){
-                for(bookBean:BookBean in mDatas){
-                    mStringBuilder.append(bookBean.bookName)
-                    mStringBuilder.append(",")
-                }
-            }
 
             uiThread {
                 if(mDatas.isNotEmpty()){
+                    for(bookBean:BookBean in mDatas){
+                        mStringBuilder.append(bookBean.bookName)
+                        mStringBuilder.append(",")
+                    }
                     mTvLike.text = "喜欢的书：$mStringBuilder"
                 }else{
                     mTvLike.text = "喜欢的书：暂无（请在主页添加）"
